@@ -1,5 +1,5 @@
 import os 
-from flask import Flask ,  request
+from flask import Flask ,  request , render_template
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv 
 
@@ -19,7 +19,7 @@ from models import User , ChatHistory
 
 @app.route("/")
 def home():
-    return "Hello i am solveai!"
+    return render_template("index.html")    
 
 
 @app.route("/whatsapp_webhook", methods= ['POST'])
