@@ -1,0 +1,37 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+ENV/
+env/
+
+# Flask instance folder (for sessions, uploads, etc.)
+instance/
+
+# Static files
+static/
+
+# Flask cache files
+*.log
+*.db
+
+# IDE or editor-specific files (optional)
+.vscode/
+.idea/
+
+# Python-specific packaging and dependency management
+*.egg-info/
+.eggs/
+dist/
+build/
+*.egg
+*.whl
+
+# Pytest cache
+.pytest_cache/
+
+# Ignore dotenv environment variables
+.env
