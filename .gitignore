@@ -1,37 +1,37 @@
-# Byte-compiled / optimized / DLL files
+# Python
 __pycache__/
 *.py[cod]
-*$py.class
-
-# Virtual environment
-venv/
-ENV/
+*.pyo
+*.pyd
+.Python
 env/
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
 
-# Flask instance folder (for sessions, uploads, etc.)
+# Flask
 instance/
+.webassets-cache
 
-# Static files
-static/
-
-# Flask cache files
-*.log
+# Databases
 *.db
+*.sqlite
 
-# IDE or editor-specific files (optional)
+# Logs
+*.log
+
+# Environment variables
+.env
+
+# IDE specific files
 .vscode/
 .idea/
 
-# Python-specific packaging and dependency management
-*.egg-info/
-.eggs/
-dist/
-build/
-*.egg
-*.whl
-
-# Pytest cache
-.pytest_cache/
-
-# Ignore dotenv environment variables
-.env
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
