@@ -1,34 +1,34 @@
-from app.health_modules import sleep, nutrition , exercise , stress, sexual_health , health_assessment
-from app.services import appointment_scheduler , cpap_order
-from app.bot.natural_language_processor import process_natural_language
-from app.bot.user_profile import UserProfile 
+from app.health_modules import sleep, nutrition, exercise, stress, sexual_health, health_assessment
 
+class SolveMyHealthBot:
+    def __init__(self, db_manager):
+        self.db_manager = db_manager
 
-class SolveMyHealth: 
-    def __init__(self , db_manager):
-        self.db_manager= db_manager
-        self.user_profile = UserProfile(db_manager)
-    
-    def handle_user_input(self, user_input):
-        intent = process_natural_language(user_input)
+    async def handle_user_input(self, user_input):
+        # This is a simplified version. You'll need to implement proper state management
+        # and conversation flow in a real application.
+        if 'sleep' in user_input.lower():
+            return await sleep.sleep_consultation()
+        elif 'nutrition' in user_input.lower():
+            return await nutrition.nutrition_advice()
+        elif 'exercise' in user_input.lower():
+            return await exercise.exercise_guidance()
+        elif 'stress' in user_input.lower():
+            return await stress.stress_management()
+        elif 'sexual health' in user_input.lower():
+            return await sexual_health.sexual_health_consultation()
+        elif 'health assessment' in user_input.lower():
+            return await health_assessment.start_assessment()
+        else:
+            return "I'm not sure how to help with that. Can you try rephrasing your question?"
 
-        if intent == 'sleep':
-            return sleep.sleep_consultation()
-        elif intent == 'nutrition':
-            return nutrition.nutrition_advice()
-        elif intent == 'exercise':
-            return exercise.exercise_guidance()
-        elif intent == 'stress':
-            return sexual_health.sexual_health_consultation()
-        elif intent == 'appointment':
-            return appointment_scheduler.book_appointment()
-        elif intent == 'cpap':
-            return cpap_order.cpap_info()
-        elif intent == 'health_assessment':
-            return health_assessment.start_assessment()
-        else: 
-            return "I m sorry i didnt get that , Please try again."
-        
+    async def create_user_profile(self, name, age, height, weight, gender, contact_info):
+        user_id = await self.db_manager.add_user(name, age, height, weight, gender, contact_info)
+        return f"User profile created with ID: {user_id}"
 
-        
-         
+    async def get_user_profile(self, user_id):
+        user = await self.db_manager.get_user(user_id)
+        if user:
+            return f"User: {user.name}, Age: {user.age}, Height: {user.height}, Weight: {user.weight}"
+        else:
+            return "User not found"

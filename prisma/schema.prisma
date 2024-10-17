@@ -1,0 +1,38 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-py"
+}
+
+model UserProfile {
+  id             Int                 @id @default(autoincrement())
+  name           String
+  age            Int?
+  height         Float?
+  weight         Float?
+  gender         String?
+  contactInfo    String?
+  assessments    HealthAssessment[]
+  consultations  ConsultationRecord[]
+}
+
+model HealthAssessment {
+  id             Int         @id @default(autoincrement())
+  userId         Int
+  user           UserProfile @relation(fields: [userId], references: [id])
+  assessmentDate DateTime    @default(now())
+  score          Float?
+  notes          String?
+}
+
+model ConsultationRecord {
+  id               Int         @id @default(autoincrement())
+  userId           Int
+  user             UserProfile @relation(fields: [userId], references: [id])
+  consultationDate DateTime    @default(now())
+  doctor           String?
+  notes            String?
+}

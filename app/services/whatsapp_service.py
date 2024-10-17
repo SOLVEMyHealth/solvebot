@@ -1,9 +1,9 @@
-import requests
+import aiohttp
 from config.config import Config
 
 WHATSAPP_API_URL = f"https://graph.facebook.com/v13.0/{Config.WHATSAPP_PHONE_NUMBER_ID}/messages"
 
-def send_whatsapp_message(recipient, message):
+async def send_whatsapp_message(recipient, message):
     payload = {
         "messaging_product": "whatsapp",
         "recipient_type": "individual",
@@ -15,5 +15,6 @@ def send_whatsapp_message(recipient, message):
         "Authorization": f"Bearer {Config.WHATSAPP_ACCESS_TOKEN}",
         "Content-Type": "application/json"
     }
-    response = requests.post(WHATSAPP_API_URL, json=payload, headers=headers)
-    return response.json()
+    async with aiohttp.ClientSession() as session:
+        async with session.post(WHATSAPP_API_URL, json=payload, headers=headers) as response:
+            return await response.json()
